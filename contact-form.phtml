@@ -18,7 +18,7 @@
 
 ?>
 
-<?= (isset($_SESSION['contact-form']['sent']) ? ' ?>
+<?= (isset($_SESSION['contact-form']['sent']) ? $_SESSION['contact-form']['sent']:'' ?>
 <form method="post" action="/kontakt">
     <?= (isset($_SESSION['contact-form']['notice']) ? $_SESSION['contact-form']['notice']:'' ?>
 	<input name='message' type='text'>
