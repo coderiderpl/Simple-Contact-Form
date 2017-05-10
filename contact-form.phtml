@@ -1,31 +1,31 @@
 <?php
 
-	if (isset($_POST['message'])) {
-	    if (empty($_POST['message'])) {
-	        $_SESSION['contact-form']['notice'] = 'Write a message, please.';
-	    } else {
-	        mail(
-	            'ex@example.com',
-	            'Contact form message',
-	            $_POST['message'],
-	            "Content-Type: text/html; charset=UTF-8"
-	       );
-	       $_SESSION['contact-form']['sent'] = 'Message has been sent.';
-	       header('Location: /kontakt');
-	       exit;
-	    }
-	}
+if (isset($_POST['message'])) {
+  if (empty($_POST['message'])) {
+    $_SESSION['contact-form']['notice'] = 'Write a message, please.';
+  } else {
+    mail(
+      'ex@example.com',
+      'Contact form message',
+      $_POST['message'],
+      "Content-Type: text/html; charset=UTF-8"
+    );
+    $_SESSION['contact-form']['sent'] = 'Message has been sent.';
+    header('Location: /kontakt');
+    exit;
+  }
+}
 
 ?>
 
 <?= (isset($_SESSION['contact-form']['sent']) ? $_SESSION['contact-form']['sent']:'' ?>
 <form method="post" action="/kontakt">
-    <?= (isset($_SESSION['contact-form']['notice']) ? $_SESSION['contact-form']['notice']:'' ?>
-	<input name='message' type='text'>
+  <?= (isset($_SESSION['contact-form']['notice']) ? $_SESSION['contact-form']['notice']:'' ?>
+  <input name='message' type='text'>
 </form>
 
 <?php
-    if (isset($_SESSION['contact-form'])) {
-        unset($_SESSION['contact-form']);
-    }
+  if (isset($_SESSION['contact-form'])) {
+    unset($_SESSION['contact-form']);
+  }
 ?>
