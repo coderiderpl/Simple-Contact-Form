@@ -2,12 +2,12 @@
 
 $smtp = [
   
-  'host' => 'mail.' . str_replace('www.', '', $_SERVER['HTTP_HOST']),
-  'user' => 'mailer@' . str_replace('www.', '', $_SERVER['HTTP_HOST']),
-  'password' => 'Kss5s89s6s',
-  'subject' => 'Contact Form: ' . str_replace('www.', '', $_SERVER['HTTP_HOST']),
-  'to' => 'larsentier@gmx.com',
-  'from' => 'mailer@' . str_replace('www.', '', $_SERVER['HTTP_HOST']),
+  'host' => 'mail.my-domain.com',
+  'user' => 'mailer@my-domain.com',
+  'password' => 'my-pass',
+  'subject' => 'Contact Form: my-domain.com',
+  'to' => 'admin@my-domain.com',
+  'from' => 'mailer@my-domain.com',
   'port' => 25,
 
   
