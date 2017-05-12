@@ -1,35 +1,27 @@
 <?php
 
-namespace CodeRider;
-
-session_start();
+namespace CodeRider\Extensions\Mailer;
 
 class MailSender {
   
 /*
-* @param $config array Config for PHP mailer
-* @param $inputs array INputs from HTML Form
+* @param $message string Message to send
+* @param $config array Config for PHP Mailer
 */
   
-  public function __construct(array $config, array $inputs) {
+  public function __construct($message, $config) {
     
+    $this->message = $message;
     $this->config = $config;
-    $this->inputs = $inputs;
       
   }
   
 /*
-* Send e-mail via PHP Mailer, set error or success to $_SESSION
+* Send e-mail via PHP Mailer
+* Returns true if mail has been sent or false of not
 */
   
   public function send() {
-    
-    if (!$this->validate()) {
-      $_SESSION['contact-form']['error'] = 'All fields are required.';
-      $_SESSION['contact-form']['inputs'] = $this->inputs;
-      return;
-    }
-    
     
     $mail = new \PHPMailer();
     $mail->SMTPDebug = 0;
@@ -45,60 +37,18 @@ class MailSender {
     # Mail
     $mail->SetFrom($this->config['user']);
     $mail->Subject = $this->config['subject'];
-    if (isset($inputs['mail'])) {
-      $mail->AddReplyTo($inputs['mail']);
-    } else {
-      $mail->AddReplyTo($this->config['user']);
-    }
-    $mail->MsgHTML($this->prepareMessage());
-
+    $mail->AddReplyTo($this->config['user']);
+    $mail->MsgHTML(message);
 
     if (!$mail->send()) {
-      $_SESSION['contact-form']['error'] = 'Message could not be sent.';
-      $_SESSION['contact-form']['inputs'] = $this->inputs;
-      # $_SESSION['contact-form']['error'] = 'Message could not be sent: ' . $mail->ErrorInfo;
+      # $mail->ErrorInfo;
+      return false;
       return;
     } else {
-      $_SESSION['contact-form']['success'] = 'Message has been sent.';
-      return;
+      return true;
     }
     
   }
   
-/*
-* Validate whether inputs are empty
-*/
-  
-  private function validate() {
-    
-    foreach ($this->inputs as $input) {
-
-      if (empty(trim($input))) {
-        return false;
-      }
-
-    }
-    
-    return 1;
-    
-  }
-  
-/*
-* Insert all inputs into message
-*/
-  
-  private function prepareMessage() {
-    
-    foreach ($this->inputs as $key=>$input) {
-      
-      $part = nl2br($input);
-      $part = '<p>' . $key . ': ' . $input . '</p>';
-      $content[] = $part;
-      
-    }
-    $content = implode('', $content);
-    return $content;
-    
-  }
   
 }
