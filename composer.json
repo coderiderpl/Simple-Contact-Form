@@ -1,0 +1,16 @@
+{
+    "name": "CodeRider/MailSender",
+    "description": "Mail Sender",
+    "homepage": "http://coderider.pl",
+    "type": "mailer",
+    "license": "GNU GPL",
+    "require": {
+        "php": ">=5.3.0",
+        "phpmailer/phpmailer": "^5.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "CodeRider\\": "src/"
+        }
+    }
+}
