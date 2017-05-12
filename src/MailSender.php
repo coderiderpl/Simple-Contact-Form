@@ -38,7 +38,7 @@ class MailSender {
     $mail->SetFrom($this->config['user']);
     $mail->Subject = $this->config['subject'];
     $mail->AddReplyTo($this->config['user']);
-    $mail->MsgHTML(message);
+    $mail->MsgHTML($this->message);
 
     if (!$mail->send()) {
       # $mail->ErrorInfo;
