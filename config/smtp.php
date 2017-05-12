@@ -9,9 +9,7 @@ $smtp = [
   'to' => 'admin@my-domain.com',
   'from' => 'mailer@my-domain.com',
   'port' => 25,
-
-  
-  
+ 
 ];
 
 ?>
