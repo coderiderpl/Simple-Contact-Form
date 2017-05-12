@@ -43,7 +43,6 @@ class MailSender {
     if (!$mail->send()) {
       # $mail->ErrorInfo;
       return false;
-      return;
     } else {
       return true;
     }
